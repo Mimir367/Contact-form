@@ -1,0 +1,320 @@
+body{
+    margin: 0;
+    font-family: 'Karla', sans-serif;
+    background-color: hsl(186, 15%, 90%);
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+
+.error-message{
+    display: none;
+    color: hsl(0, 66%, 54%);
+}
+
+main{
+    display: flex;
+    flex-direction: column;
+    width: 750px;
+    background-color: white;
+    padding: 25px;
+    border-radius: 15px;
+}
+
+#form{
+    display: flex;
+    flex-direction: column;
+}
+
+#personal-data{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    "first-name last-name"
+    "email email"
+    ;
+    gap: 15px;
+}
+
+#personal-data div{
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 12px;
+}
+
+#message-container{
+    display: flex;
+    flex-direction: column;
+}
+
+#personal-data div:nth-child(1){
+    grid-area: first-name;
+}
+
+#personal-data div:nth-child(2){
+    grid-area: last-name;
+}
+
+#personal-data div:nth-child(3){
+    grid-area: email;
+    width: 100%;
+}
+
+#email{
+    width: calc(100% - 22px);
+}
+
+.star{
+    color: hsl(169, 82%, 27%);
+}
+
+input{
+    border-radius: 5px;
+    border: solid 1px hsl(0, 0%, 60%);
+    font-size: 1.2em;
+    padding: 10px;
+    outline: none;
+    cursor: pointer;
+}
+
+label{
+    margin-bottom: 10px;
+}   
+
+h1{
+    margin-bottom: 35px;
+    margin-top: 0;
+}
+
+#radio-group{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-areas: 
+    "header header"
+    "general-enquiry technical-support";
+    gap: 15px;
+    margin: 15px 0 15px 0;
+}
+
+#radio-group label{
+    display: flex;
+    flex-direction: row;
+    align-items: center;   
+    padding: 15px 25px 15px 25px;
+    border: solid 1px hsl(0, 0%, 60%);
+    margin: 0;
+    border-radius: 5px;
+}
+
+h2{
+    grid-area: header;
+    font-weight: normal;
+    font-size: 1em;
+    margin: 0;
+}
+
+#general-enquiry{
+    grid-area: general-enquiry;
+}
+
+#technical-support{
+    grid-area: technical-support;
+}
+
+#radio-group div input{
+    margin: 0;
+    transform: scale(1.5);
+}
+
+#message{
+    border: solid 1px hsl(0, 0%, 60%);
+    border-radius: 5px;
+    height: 70px;
+    resize: none;
+    padding: 10px;
+    outline: none;
+}
+
+#checkbox-container{
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    margin: 30px 0 30px 0;
+}
+
+#checkbox-container label{
+    margin: 0;
+}
+
+#checkbox-container input{
+    transform: scale(1.2);
+}
+
+button{
+    background-color: hsl(169, 82%, 27%);
+    color: white;
+    font-size: 1em;
+    border: none;
+    border-radius: 10px;
+    padding: 20px;
+    cursor: pointer;
+    width: 100%;
+    font-weight: bold;
+    letter-spacing: 0.1em;
+    transition: background-color 0.1s ease;
+}
+
+#checkbox-container div{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+@keyframes alert-appear{
+    0%{
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    100%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes alert-disappear{
+    0%{
+        opacity: 1;
+        transform: translateY(0);
+    }
+    100%{
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+}
+
+#alert{
+    display: none;
+    position: fixed;
+    top: 30px;
+    background-color: hsl(169, 82%, 15%);
+    color: white;
+    padding: 25px;
+    border-radius: 20px;
+}
+    
+#alert-header{
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+#alert-header img{
+    margin: 0;
+    margin-right: 15px;
+    width: 25px;
+}
+
+#alert p{
+    margin: 0;
+    font-size: 1em;
+    font-weight: 200;
+}
+
+#alert-header p{
+    font-size: 1.2em;
+    font-weight: 600;
+}
+
+#consent{
+    display: none;
+}
+
+#checkmark{
+    width: 18px;
+    height: 18px;
+    border: solid 1px hsl(0, 0%, 60%);
+    border-radius: 5px;
+    margin-right: 10px;
+    position: relative;
+}
+
+
+#consent:checked + #checkmark{
+    background-image: url("./assets/images/icon-checkbox-check.svg");
+    background-size: 100% 100%;
+}
+
+#checkbox{
+    display: grid;
+    grid-template-columns: 30px calc(100% - 30px);
+    cursor: pointer;
+    margin: 0;
+}
+
+#radio-group label{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+input[type="radio"]{
+    display: none;
+}
+
+.checkmark-radio{
+    width: 18px;
+    height: 18px;
+    border: solid 1px hsl(0, 0%, 60%);
+    border-radius: 50%;
+    margin-right: 10px;
+    position: relative;
+    padding: 0;
+}
+
+input[type="radio"]:checked + .checkmark-radio{
+    background-image: url("./assets/images/icon-radio-selected.svg");
+    background-size: 100% 100%;
+    border-color: white;
+}
+
+label:has(input[type="radio"]:checked){
+    border-color: hsl(169, 82%, 27%) !important;
+    background-color: hsl(169, 82%, 27%, 0.3);
+}
+
+#checkbox .error-message{
+    grid-area: 2 / 1 / span 1 / span 2;
+}
+
+button:hover{
+    background-color: hsl(169, 82%, 10%);
+}
+
+input:hover{
+    border-color: hsl(169, 82%, 27%);
+}
+
+@media screen and (max-width : 830px) {
+    main{
+        width: 80%;
+    }
+
+    #personal-data{
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+        "first-name"
+        "last-name"
+        "email"
+        ;
+    }
+
+    #radio-group{
+        grid-template-columns: 1fr;
+        grid-template-areas: 
+        "header"
+        "general-enquiry"
+        "technical-support";
+    }
+}
