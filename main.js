@@ -1,63 +1,51 @@
-const inputs = document.querySelectorAll('.personal-data div input, .message-input');
-const radioButtons = document.querySelectorAll('.radio-group input[type="radio"]');
-const button = document.querySelector('button');
+document.getElementById('contactForm').addEventListener('submit', function(e) {
+      e.preventDefault();
+      
+      let isValid = true;
+      
+      const firstName = document.getElementById('firstName');
+      const lastName = document.getElementById('lastName');
+      const email = document.getElementById('email');
+      const queryTypes = document.getElementsByName('queryType');
+      const message = document.getElementById('message');
+      const consent = document.getElementById('consent');
+      
+      document.querySelectorAll('.form-group').forEach(group => {
+        group.classList.remove('error');
+      });
 
-inputs.forEach(input => {
-    input.addEventListener('input', event => {
-        event.preventDefault();
-        input.setCustomValidity('');
+      const showError = (elementId) => {
+        document.getElementById(elementId).classList.add('error');
+        isValid = false;
+      };
 
-        if (input.validity.valid) {
-            const errorMessage = input.nextElementSibling;
-            errorMessage.style.display = 'none';
-            input.style.borderColor = 'hsl(0, 0%, 60%)';
-        } else {
-            const errorMessage = input.nextElementSibling;
-            errorMessage.style.display = 'block';
-            input.style.borderColor = 'hsl(0, 100%, 74%)';
-        }
-    });
-});
+      if (!firstName.value.trim()) showError('firstNameGroup');
+      if (!lastName.value.trim()) showError('lastNameGroup');
+      
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      if (!email.value.trim()) {
+        document.getElementById('emailErrorMsg').innerText = "This field is required";
+        showError('emailGroup');
+      } else if (!emailRegex.test(email.value)) {
+        document.getElementById('emailErrorMsg').innerText = "Please enter a valid email address";
+        showError('emailGroup');
+      }
 
-button.addEventListener('click', event => {
-    let correct = true;
-    event.preventDefault();
-    const formElements = document.querySelectorAll('input, textarea, input[type="radio"], input[type="checkbox"]');
+      const isQuerySelected = Array.from(queryTypes).some(radio => radio.checked);
+      if (!isQuerySelected) showError('queryGroup');
 
-    formElements.forEach(element => {
-        if (!element.validity.valid) {
-            const errorMessage = document.querySelector(`#${element.id} ~ .error-message`);
-            errorMessage.style.display = 'block';
-            element.style.borderColor = 'hsl(0, 100%, 74%)';
-            correct = false;
-        }
-    });
+      if (!message.value.trim()) showError('messageGroup');
 
-    if (!correct) return;
+      if (!consent.checked) showError('consentGroup');
 
-    formElements.forEach(element => {
-        element.value = '';
-        element.checked = false;
-    });
-
-    const alert = document.getElementById('alert');
-
-    const prefersReducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
-
-    alert.style.display = 'block';
-
-    if (!prefersReducedMotion) {
-        alert.style.animation = 'alert-appear 0.5s ease-out';
-
+      if (isValid) {
+        const toast = document.getElementById('successToast');
+        toast.classList.add('show');
+        
+        this.reset();
+        
         setTimeout(() => {
-            alert.style.animation = 'alert-disappear 0.8s ease-out';
-            setTimeout(() => {
-                alert.style.display = 'none';
-            }, 790);
-        }, 7000);
-    } else {
-        setTimeout(() => {
-            alert.style.display = 'none';
-        }, 7000);
-    }
-});
+          toast.classList.remove('show');
+        }, 4000);
+      }
+    });
