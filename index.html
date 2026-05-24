@@ -1,84 +1,89 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+  <title>Frontend Mentor | Contact form</title>
+   <link rel="stylesheet" href="contactform.css">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Karla:wght@400;700&display=swap" rel="stylesheet">
 
-    <link rel="icon" type="image/png" sizes="32x32" href="./assets/images/favicon-32x32.png">
-    <link rel="stylesheet" href="./style.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Karla:ital,wght@0,200..800;1,200..800&family=Roboto+Slab:wght@100..900&family=Work+Sans:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
 
-    <title>Frontend Mentor | Contact form</title>
-  </head>
-  <body>
+</head>
+<body>
 
-    <div class="alert" id="alert">
-      <div class="alert-header">
-        <img src="./assets/images/icon-success-check.svg" alt="Success Icon">
-        <p>Message Sent!</p>
-      </div>
-      <p>Thanks for completing the form. We'll be in touch soon!</p>
+  <div class="toast-container" id="successToast">
+    <div class="toast-title">
+      <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      Message Sent!
     </div>
+    <div class="toast-body">
+      Thanks for completing the form. We'll be in touch soon!
+    </div>
+  </div>
 
-    <main>
-      <h1>Contact Us</h1>
+  <main class="card">
+    <h1>Contact Us</h1>
 
-      <form>
-        <div class="personal-data">
-          <div>
-            <label for="first-name">First Name<span class="star">*</span></label>
-            <input type="text" id="first-name" name="first-name" required>
-            <span class="error-message">This field is required</span>
-          </div>
-
-          <div>
-            <label for="last-name">Last Name<span class="star">*</span></label>
-            <input type="text" id="last-name" name="last-name" required>
-            <span class="error-message">This field is required</span>
-          </div>
-
-          <div>
-            <label for="email">Email Address<span class="star">*</span></label>
-            <input type="email" id="email" name="email" class="email-input" required>
-            <span class="error-message">Please enter a valid email address</span>
-          </div>
+    <form id="contactForm" novalidate>
+      
+      <div class="row">
+        <div class="form-group" id="firstNameGroup">
+          <label for="firstName">First Name <span class="asterisk">*</span></label>
+          <input type="text" id="firstName" name="firstName">
+          <span class="error-msg">This field is required</span>
         </div>
 
-        <div class="radio-group">
-          <h2>Query Type<span class="star">*</span></h2>
-          <label class="radio-general">
-            <input type="radio" name="query-type" id="general-enquiry-button" value="general-enquiry" required>
-            <div class="checkmark-radio"></div>
+        <div class="form-group" id="lastNameGroup">
+          <label for="lastName">Last Name <span class="asterisk">*</span></label>
+          <input type="text" id="lastName" name="lastName">
+          <span class="error-msg">This field is required</span>
+        </div>
+      </div>
+
+      <div class="form-group" id="emailGroup">
+        <label for="email">Email Address <span class="asterisk">*</span></label>
+        <input type="email" id="email" name="email">
+        <span class="error-msg" id="emailErrorMsg">Please enter a valid email address</span>
+      </div>
+
+      <div class="form-group" id="queryGroup">
+        <label>Query Type <span class="asterisk">*</span></label>
+        <div class="row" style="margin-bottom: 0; gap: 1.5rem;">
+          <label class="radio-box">
+            <input type="radio" name="queryType" value="General Enquiry">
             <span>General Enquiry</span>
           </label>
-          <label class="radio-support">
-            <input type="radio" name="query-type" id="support-request-button" value="support-request" required>
-            <div class="checkmark-radio"></div>
+          <label class="radio-box">
+            <input type="radio" name="queryType" value="Support Request">
             <span>Support Request</span>
           </label>
-          <span class="error-message">Please select a query type</span>
         </div>
+        <span class="error-msg">Please select a query type</span>
+      </div>
 
-        <div class="message-container">
-          <label for="message">Message<span class="star">*</span></label>
-          <textarea id="message" name="message" class="message-input" required></textarea>
-          <span class="error-message">This field is required</span>
-        </div>
+      <div class="form-group" id="messageGroup">
+        <label for="message">Message <span class="asterisk">*</span></label>
+        <textarea id="message" name="message"></textarea>
+        <span class="error-msg">This field is required</span>
+      </div>
 
-        <div class="checkbox-container">
-          <label class="checkbox-label" id="checkbox">
-            <input type="checkbox" id="consent" name="consent" required>
-            <div class="checkmark"></div>
-            <span>I consent to being contacted by the team<span class="star">*</span></span>
-            <span class="error-message">To submit this form, please consent to being contacted</span>
-          </label>
-        </div>
+      <div class="form-group" id="consentGroup" style="margin-bottom: 2rem;">
+        <label class="consent-group" style="margin-bottom: 0; cursor: pointer;">
+          <input type="checkbox" id="consent" name="consent">
+          <span>I consent to being contacted by the team <span class="asterisk">*</span></span>
+        </label>
+        <span class="error-msg">To submit this form, please consent to being contacted</span>
+      </div>
 
-        <button type="submit">Submit</button>
-      </form>
-    </main>
-    <script src="main.js"></script>
-  </body>
+      <button type="submit">Submit</button>
+
+    </form>
+  </main>
+
+<script src="main.js"></script>
+</body>
 </html>
